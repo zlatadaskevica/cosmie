@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- ## Public landing content introducing the project -->
+<section class="hero-panel">
+    <h2>Track the universe in one place.</h2>
+    <p>
+        Cosmie helps you explore daily space highlights, Mars rover images,
+        asteroid activity, Earth snapshots, solar events, and curated NASA images.
+    </p>
+
+    <!-- ## Main call-to-action buttons -->
+    <div class="cta-buttons">
+        <a class="button" href="{{ url_for('login') }}">Login</a>
+        <a class="button secondary" href="{{ url_for('signup') }}">Sign Up</a>
+    </div>
+</section>
+{% endblock %}

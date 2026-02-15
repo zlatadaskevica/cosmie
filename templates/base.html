@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ## Shared page metadata and global stylesheet -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmie</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- ## Decorative star background used on all pages -->
+    <div class="stars"></div>
+
+    <!-- ## Global header and navigation -->
+    <header class="main-header">
+        <h1 class="logo">Cosmie</h1>
+
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('landing_page') }}">Home</a></li>
+                {% if session.get('user_id') %}
+                    <!-- ## Authenticated user links -->
+                    <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('preferences') }}">Preferences</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% else %}
+                    <!-- ## Guest links -->
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content-wrapper">
+        <!-- ## Reusable flash message section -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-container">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- ## Page-specific content placeholder -->
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

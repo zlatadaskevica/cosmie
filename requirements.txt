@@ -1,0 +1,10 @@
+# Flask backend framework
+Flask==3.0.3
+# ORM and DB integration
+Flask-SQLAlchemy==3.1.1
+# PostgreSQL driver
+psycopg2-binary==2.9.9
+# HTTP requests for NASA APIs
+requests==2.32.3
+# Environment variable loading
+python-dotenv==1.0.1

@@ -1,0 +1,190 @@
+/* ## Theme color tokens used across the site */
+:root {
+    --dark-bg: #050b2d;
+    --panel-bg: #0f1b4c;
+    --accent: #1f4ae0;
+    --text: #ffffff;
+    --muted: #b8c6ff;
+    --danger: #ff7b7b;
+}
+
+/* ## Consistent box model for all elements */
+* {
+    box-sizing: border-box;
+}
+
+/* ## Global page layout and dark theme base */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--dark-bg);
+    color: var(--text);
+    min-height: 100vh;
+    position: relative;
+}
+
+/* ## Repeating star pattern overlay */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image:
+        radial-gradient(2px 2px at 20px 40px, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 100px 100px, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(2px 2px at 180px 140px, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(1px 1px at 260px 70px, rgba(255, 255, 255, 0.5), transparent);
+    background-size: 300px 220px;
+    opacity: 0.45;
+}
+
+/* ## Sticky header containing logo and nav links */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(15, 27, 76, 0.9);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.logo {
+    margin: 0;
+}
+
+/* ## Horizontal navigation menu */
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu a {
+    color: var(--text);
+    text-decoration: none;
+}
+
+/* ## Main content spacing */
+.content-wrapper {
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* ## Shared card styling for sections */
+.hero-panel,
+.form-card,
+.sector-card {
+    background: rgba(15, 27, 76, 0.92);
+    border: 1px solid #2d3f86;
+    border-radius: 12px;
+    padding: 1.2rem;
+}
+
+.hero-panel {
+    max-width: 760px;
+}
+
+/* ## Layout for CTA buttons */
+.cta-buttons {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+/* ## Shared button appearance */
+.button,
+button {
+    background: var(--accent);
+    color: var(--text);
+    border: none;
+    border-radius: 6px;
+    padding: 0.55rem 1rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.button.secondary {
+    background: #2a3b80;
+}
+
+/* ## Vertical form flow */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+/* ## Input field styling for dark theme */
+input[type="text"],
+input[type="password"] {
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #5166b1;
+    background: #09133b;
+    color: var(--text);
+}
+
+/* ## Responsive dashboard grid that resizes based on enabled sectors */
+.grid-sectors {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.sector-card img {
+    margin-top: 0.5rem;
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+/* ## Divider block for repeated items inside cards */
+.item-block {
+    margin-top: 0.7rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid #32468f;
+}
+
+/* ## Checkbox group layout */
+.checkbox-list {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ## Flash feedback styles */
+.flash-container {
+    margin-bottom: 1rem;
+}
+
+.flash-message {
+    background: #18306e;
+    border-left: 4px solid #8cc3ff;
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin-bottom: 0.4rem;
+}
+
+.flash-message.error {
+    border-left-color: var(--danger);
+}
+
+.hint {
+    color: var(--muted);
+}
+
+.error-text {
+    color: var(--danger);
+}

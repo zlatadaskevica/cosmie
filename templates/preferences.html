@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- ## Preferences page for selecting API sectors -->
+<section class="form-card">
+    <h2>Preferences</h2>
+    <p>Select the NASA feeds you want on your dashboard.</p>
+
+    <form method="post">
+        <!-- ## Generate one checkbox per API option -->
+        <div class="checkbox-list">
+            {% for api_code, api_label in api_options %}
+                <label class="checkbox-item">
+                    <input type="checkbox" name="apis" value="{{ api_code }}" {% if api_code in enabled_codes %}checked{% endif %}>
+                    {{ api_label }}
+                </label>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Save Preferences</button>
+    </form>
+</section>
+{% endblock %}

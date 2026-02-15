@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- ## Personalized greeting and context text -->
+<section>
+    <h2>Welcome, {{ session['username'] }}</h2>
+    <p>Here are your selected cosmic event feeds.</p>
+</section>
+
+{% if sectors %}
+    <!-- ## Responsive grid with one card per enabled API -->
+    <section class="grid-sectors">
+        {% for sector in sectors %}
+            <article class="sector-card">
+                <h3>{{ sector.title }}</h3>
+                <p>{{ sector.description }}</p>
+
+                {% if sector.data.error %}
+                    <p class="error-text">{{ sector.data.error }}</p>
+                {% elif sector.code == 'apod' %}
+                    <!-- ## APOD rendering block -->
+                    <p><strong>{{ sector.data.title }}</strong> ({{ sector.data.date }})</p>
+                    <p title="{{ sector.data.description }}" style="cursor: help;">{{ sector.data.description[:220] }}...</p>
+                    {% if sector.data.media_type == 'image' and sector.data.url %}
+                        <img src="{{ sector.data.url }}" alt="APOD image">
+                    {% endif %}
+                {% elif sector.code == 'mars' %}
+                    <!-- ## Mars weather rendering block -->
+                    {% if sector.data.weather %}
+                        <div class="item-block">
+                            <p><strong>Latest Sol:</strong> {{ sector.data.weather.sol }}</p>
+                            <p><strong>Average temperature (°C):</strong> {{ sector.data.weather.average_temperature if sector.data.weather.average_temperature is not none else 'N/A' }}</p>
+                            <p><strong>Wind speed (m/s):</strong> {{ sector.data.weather.wind_speed if sector.data.weather.wind_speed is not none else 'N/A' }}</p>
+                            <p><strong>Pressure (Pa):</strong> {{ sector.data.weather.pressure if sector.data.weather.pressure is not none else 'N/A' }}</p>
+                            <p><strong>Season:</strong> {{ sector.data.weather.season or 'N/A' }}</p>
+                        </div>
+                    {% else %}
+                        <p>No Mars weather data available right now.</p>
+                    {% endif %}
+                {% elif sector.code == 'neo' %}
+                    <!-- ## NEO rendering block -->
+                    {% for asteroid in sector.data.asteroids %}
+                        <div class="item-block">
+                            <p><strong>{{ asteroid.name }}</strong></p>
+                            <p>Estimated diameter: {{ asteroid.diameter }}</p>
+                            <p>Miss distance: {{ asteroid.miss_distance }}</p>
+                        </div>
+                    {% endfor %}
+                {% elif sector.code == 'donki' %}
+                    <!-- ## DONKI rendering block -->
+                    {% for event in sector.data.events %}
+                        <div class="item-block">
+                            <p>Catalog: {{ event.catalog }}</p>
+                            <p>Start time: {{ event.start_time }}</p>
+                        </div>
+                    {% endfor %}
+                {% elif sector.code == 'images' %}
+                    <!-- ## NASA image library rendering block -->
+                    {% for image in sector.data.images %}
+                        <div class="item-block">
+                            <p><strong>{{ image.title }}</strong></p>
+                            <p title="{{ image.description }}" style="cursor: help;">{{ image.description[:160] }}...</p>
+                            {% if image.url %}
+                                <img src="{{ image.url }}" alt="NASA library image">
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </article>
+        {% endfor %}
+    </section>
+{% else %}
+    <!-- ## Empty-state message when user disables all sectors -->
+    <p>No sectors enabled yet. Please enable at least one API in Preferences.</p>
+{% endif %}
+{% endblock %}
