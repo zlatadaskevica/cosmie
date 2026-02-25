@@ -8,3 +8,5 @@ psycopg2-binary==2.9.9
 requests==2.32.3
 # Environment variable loading
 python-dotenv==1.0.1
+# Production WSGI server (required for Render deployment)
+gunicorn==21.2.0
