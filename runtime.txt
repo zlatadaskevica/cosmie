@@ -1,2 +1,0 @@
-# Python runtime version for Render deployment
-python-3.11.9
