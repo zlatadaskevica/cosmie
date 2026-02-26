@@ -53,7 +53,7 @@ NASA_API_KEY = os.getenv("NASA_API_KEY", "DEMO_KEY")
 # Available dashboard sectors
 API_OPTIONS = [
     ("apod", "Astronomy Picture of the Day"),
-    ("mars", "Mars Rover Latest Photos"),
+    ("mars", "Mars Weather"),
     ("neo", "Near Earth Objects"),
     ("donki", "DONKI Coronal Mass Ejections"),
     ("images", "NASA Image Library"),
