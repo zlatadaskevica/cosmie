@@ -202,7 +202,7 @@ def dashboard():
         sectors.append({
             "code": "mars",
             "title": "Mars Weather",
-            "description": "Latest weather data from Mars surface.",
+            "description": "Latest available Mars weather data from the InSight mission.",
             "data": fetch_mars_data(NASA_API_KEY),
         })
 
